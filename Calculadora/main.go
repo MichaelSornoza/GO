@@ -11,14 +11,14 @@ import (
 func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
-
 	scanner.Scan()
 
 	operacion := scanner.Text()
-
 	fmt.Println(operacion)
 
-	valores := strings.Split(operacion, "+")
+	operador := "+"
+
+	valores := strings.Split(operacion, operador)
 
 	fmt.Println(valores)
 
@@ -32,5 +32,16 @@ func main() {
 
 	operador2, _ := strconv.Atoi(valores[1])
 
-	fmt.Println(operador1 + operador2)
+	switch operador {
+	case "+":
+		fmt.Println(operador1 + operador2)
+	case "-":
+		fmt.Println(operador1 - operador2)
+	case "*":
+		fmt.Println(operador1 * operador2)
+	case "/":
+		fmt.Println(operador1 / operador2)
+	default:
+		fmt.Println("Error, opcion no valida")
+	}
 }

@@ -13,6 +13,29 @@ func (t *taskList) agregarALista(tarea *task) {
 	t.tasks = append(t.tasks, tarea)
 }
 
+func (t *taskList) borrarTask(index int) {
+	// Eliminando un elemento del slice
+	// [:index] Desde el inicio hasta el índice
+	// [index+1:] Desde el índice hasta el final
+	t.tasks = append(t.tasks[:index], t.tasks[index+1:]...)
+}
+
+func (t *taskList) imprimirLista() {
+	for _, tarea := range t.tasks {
+		fmt.Println("Nombre: ", tarea.nombre)
+		fmt.Println("Descripcion: ", tarea.descripcion)
+	}
+}
+func (t *taskList) imprimirListaCompletado() {
+	for _, tarea := range t.tasks {
+
+		if tarea.completado {
+			fmt.Println("Nombre: ", tarea.nombre)
+			fmt.Println("Descripcion: ", tarea.descripcion)
+		}
+	}
+}
+
 type task struct {
 	nombre      string
 	descripcion string
@@ -33,13 +56,6 @@ func (t *task) actualizarDescripcion(descripcion string) {
 
 func (t *task) actualizarNombre(nombre string) {
 	t.nombre = nombre
-}
-
-func (t *taskList) borrarTask(index int) {
-	// Eliminando un elemento del slice
-	// [:index] Desde el inicio hasta el índice
-	// [index+1:] Desde el índice hasta el final
-	t.tasks = append(t.tasks[:index], t.tasks[index+1:]...)
 }
 
 func main() {
@@ -65,6 +81,12 @@ func main() {
 	}
 	lista.agregarALista(t3)
 
+	lista.imprimirLista()
+
+	lista.tasks[0].completo()
+
+	fmt.Println("Tareas Completadas")
+	lista.imprimirListaCompletado()
 	// for i := 0; i < len(lista.tasks); i++ {
 	// 	fmt.Println("Index", i, "nombre", lista.tasks[i].nombre)
 	// }
@@ -76,22 +98,22 @@ func main() {
 	// 	fmt.Println("Index", index, "nombre", tarea.nombre)
 	// }
 
-	for i := 0; i < 10; i++ {
+	// for i := 0; i < 10; i++ {
 
-		if i == 5 {
-			//Cancela la iteracion
-			break
-		}
-		fmt.Println(i)
-	}
-	for i := 0; i < 10; i++ {
+	// 	if i == 5 {
+	// 		//Cancela la iteracion
+	// 		break
+	// 	}
+	// 	fmt.Println(i)
+	// }
+	// for i := 0; i < 10; i++ {
 
-		if i == 5 {
-			//Cancela la iteracion
-			continue
-		}
-		fmt.Println(i)
-	}
+	// 	if i == 5 {
+	// 		//Cancela la iteracion
+	// 		continue
+	// 	}
+	// 	fmt.Println(i)
+	// }
 }
 
 // 	fmt.Println(len(lista.tasks))
